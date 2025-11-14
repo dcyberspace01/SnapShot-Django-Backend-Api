@@ -1,0 +1,9 @@
+body {
+    background-image: linear-gradient(to right top, white, white, white, white, white);
+    min-height: 100vh;
+}
+
+nav {
+    color: black;
+    background-color: white;
+}
