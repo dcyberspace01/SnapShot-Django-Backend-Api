@@ -18,10 +18,10 @@ def login_view(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            email = data.get("username")
+            username = data.get("username")
             password = data.get("password")
 
-            user = authenticate(request, username=email, password=password)
+            user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return JsonResponse({"message": "Login successful"})
