@@ -71,6 +71,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite dev server
+    "https://gray-coast-0ad65a10f.4.azurestaticapps.net", # Azure Frontend Domain
 ]
 
 
