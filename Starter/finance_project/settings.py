@@ -13,7 +13,12 @@ SECRET_KEY = "django-insecure-hfjjz86s+pz6y4p=&mxz)dis&l$+mt2)6r$ho@))^5))f#$whp
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    ".azurecontainerapps.io",
+    "localhost",
+    "127.0.0.1",
+]
+
 
 
 # Application definition
@@ -47,30 +52,22 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "corsheaders.middleware.CorsMiddleware"
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "finance_project.middleware.PartitionedCookieMiddleware",
 ]
 
-MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "corsheaders.middleware.CorsMiddleware",  # If using CORS
-    "django.contrib.sessions.middleware.SessionMiddleware",  # REQUIRED
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",  # REQUIRED
-    "django.contrib.messages.middleware.MessageMiddleware",  # REQUIRED
-    "debug_toolbar.middleware.DebugToolbarMiddleware",  # OPTIONAL but recommended
-    
-]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vite dev server
+    "https://gray-coast-0ad65a10f.4.azurestaticapps.net",
+
 ]
 
 
@@ -160,3 +157,9 @@ INTERNAL_IPS = [
 AUTH_USER_MODEL = 'tracker.User'
 LOGIN_REDIRECT_URL = 'index'
 CORS_ALLOW_CREDENTIALS = True
+
+SESSION_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "None"
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
