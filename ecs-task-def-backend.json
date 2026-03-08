@@ -7,7 +7,7 @@
   "executionRoleArn": "arn:aws:iam::932705495982:role/ecsTaskExecutionRole",
   "containerDefinitions": [
     {
-      "name": "snapshot-backend",
+      "name": "backend",
       "image": "REPLACE_ME",
       "portMappings": [
         { "containerPort": 8000, "protocol": "tcp" }
