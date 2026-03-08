@@ -15,7 +15,15 @@
       "essential": true,
       "environment": [
         { "name": "DJANGO_SETTINGS_MODULE", "value": "Starter.settings" }
-      ]
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/snapshot-backend",
+          "awslogs-region": "us-east-2",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
     }
   ]
 }
