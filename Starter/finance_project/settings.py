@@ -59,8 +59,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
-    "finance_project.middleware.PartitionedCookieMiddleware",
+    # "debug_toolbar.middleware.DebugToolbarMiddleware",
+    # "finance_project.middleware.PartitionedCookieMiddleware",
 ]
 
 
@@ -69,6 +69,9 @@ CORS_ALLOWED_ORIGINS = [
     "https://gray-coast-0ad65a10f.4.azurestaticapps.net",
 
 ]
+CSRF_TRUSTED_ORIGINS = [ 
+    "http://localhost:5173",
+ ]
 
 
 

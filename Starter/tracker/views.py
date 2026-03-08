@@ -3,11 +3,12 @@ from django.contrib.auth.decorators import login_required
 from tracker.models import Transaction
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 import json
 
 
-
+User = get_user_model()
 # Create your views here.
 
 def index(request):
@@ -34,7 +35,7 @@ def login_view(request):
 
 @csrf_exempt
 @login_required
-def transactions_api_view(request):
+def transactions_api_view(request, pk=None):
     if request.method == "GET":
         transactions = Transaction.objects.filter(user=request.user)
         data = [
@@ -55,6 +56,30 @@ def transactions_api_view(request):
             return JsonResponse({"message": "Transaction added"})
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)
+    elif request.method == "PUT":
+        try:
+            data = json.loads(request.body)
+            transactions = Transaction.objects.get(id = data['id'], user = request.user)
+            transactions.date = data['date']
+            transactions.type = data['type']
+            transactions.amount = data['amount']
+            transactions.save()
+            return JsonResponse({'message':'Update completed successfully'})
+        except Transaction.DoesNotExist:
+            return JsonResponse ({'error': 'This transaction does not exist'}, status=404)
+        except Exception as e:
+            return JsonResponse({'error':str(e)}, status=500)
+
+    elif request.method == "DELETE":
+        try:
+            tx_id = pk  # from URL
+            tx = Transaction.objects.get(id=tx_id, user=request.user)
+            tx.delete()
+            return JsonResponse({"message": "Deleted"})
+        except Transaction.DoesNotExist:
+            return JsonResponse({"error": "Not found"}, status=404)
+
+
 
 @csrf_exempt
 @login_required
@@ -70,6 +95,29 @@ def logout_view(request):
         logout(request)
         return JsonResponse({"message": "Logged out"})
     return JsonResponse({"error": "Only POST allowed"}, status=405)
+
+@csrf_exempt
+def signup_api_view(request):
+    if request.method != 'POST':
+        return JsonResponse({'error': "POST Required"}, status=400)
+    try:
+        data = json.loads(request.body)
+        username = data.get('username')
+        password = data.get('password')
+
+        if not username or not password:
+            return JsonResponse({'error':'Missing Username or Password'}, status=400)
+        
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'error': 'Username already exists'}, status=400)
+        
+        user = User.objects.create_user(username=username, password=password)
+        login(request, user)
+        return JsonResponse({'message': 'User created successfully', 'user_id': user.id}, status=201)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
 @login_required
 def transactions_list(request):
