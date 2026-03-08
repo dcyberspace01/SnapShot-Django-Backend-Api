@@ -13,8 +13,5 @@ COPY . /app/
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
-
-
-
+# IMPORTANT: Replace "finance_project" with your actual Django project folder name
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "finance_project.wsgi:application"]
