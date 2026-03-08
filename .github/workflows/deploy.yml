@@ -46,6 +46,10 @@ jobs:
     - name: Push backend image
       run: |
         docker push $BACKEND_URI
+    - name: Update task definition image
+     run: |
+       sed -i "s|REPLACE_ME|${BACKEND_URI}|g" ecs-task-def-backend.json
+
 
     - name: Deploy to ECS
       uses: aws-actions/amazon-ecs-deploy-task-definition@v2
