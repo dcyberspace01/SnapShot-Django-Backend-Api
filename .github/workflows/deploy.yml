@@ -8,7 +8,8 @@ env:
   AWS_REGION: us-east-2
   ECR_REPOSITORY: snapshot-backend
   ECS_CLUSTER: snapshot-cluster
-  ECS_SERVICE: snapshot-backend-service
+  ECS_SERVICE: snapshot-backend-task-service-qwyqdlzv
+
 
 jobs:
   deploy:
