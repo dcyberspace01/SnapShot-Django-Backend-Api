@@ -1,8 +1,16 @@
-__pycache__
+# Python cache
+__pycache__/
 *.pyc
-*.log
-venv
+
+# Local database
+db.sqlite3
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# Git metadata
 .git
 .gitignore
-Dockerfile
-.github
