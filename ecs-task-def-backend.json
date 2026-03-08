@@ -8,6 +8,7 @@
   "containerDefinitions": [
     {
       "name": "snapshot-backend",
+      "image": "REPLACE_ME",
       "portMappings": [
         { "containerPort": 8000, "protocol": "tcp" }
       ],
