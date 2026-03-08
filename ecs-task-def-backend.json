@@ -5,7 +5,6 @@
   "cpu": "256",
   "memory": "512",
   "executionRoleArn": "arn:aws:iam::932705495982:role/ecsTaskExecutionRole",
-  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskRole",
   "containerDefinitions": [
     {
       "name": "snapshot-backend",
