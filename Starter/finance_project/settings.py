@@ -20,7 +20,7 @@ ALLOWED_HOSTS = [
     ".azurecontainerapps.io",        
     ".compute.internal",             
     "snapshot-load-balancer-1297340465.us-east-2.elb.amazonaws.com",  
-    "172.31.5.247"
+    r"^172\.31\.\d+\.\d+$",
 ]
 
 
@@ -171,5 +171,6 @@ CSRF_COOKIE_SAMESITE = "None"
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
 
 
