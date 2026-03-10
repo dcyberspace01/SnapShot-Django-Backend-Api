@@ -14,10 +14,14 @@ SECRET_KEY = "django-insecure-hfjjz86s+pz6y4p=&mxz)dis&l$+mt2)6r$ho@))^5))f#$whp
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    ".azurecontainerapps.io",
     "localhost",
     "127.0.0.1",
+    ".azurestaticapps.net",          
+    ".azurecontainerapps.io",        
+    ".compute.internal",             
+    "snapshot-load-balancer-1297340465.us-east-2.elb.amazonaws.com",          
 ]
+
 
 
 
@@ -166,3 +170,4 @@ CSRF_COOKIE_SAMESITE = "None"
 
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
